@@ -1,7 +1,7 @@
 Change history
 ~~~~~~~~~~~~~~
 
-4.4.1+lu1 (unreleased)
+4.4.1+lu1 (2018-04-17)
 ----------------------
 
 - Quick fix Queued Mail Delivery Sets Wrong Charset (#41)
