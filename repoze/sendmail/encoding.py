@@ -72,6 +72,14 @@ def cleanup_message(message,
     payload = message.get_payload()
     if payload and isinstance(payload, text_type):
         charset = message.get_charset()
+        # see https://github.com/repoze/repoze.sendmail/issues/41
+        # We ran into this problem while upgrading our apps to
+        # py36. Maybe the api for email.message changed.
+        # We are not sure if older versions of email.message.Message
+        # have 'get_param'.
+        if not charset:
+            if hasattr(message, 'get_param'):
+                charset = message.get_param('charset')
         if not charset:
             charset, encoded = best_charset(payload)
             message.set_payload(payload, charset=charset)
